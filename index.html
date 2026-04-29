@@ -1,85 +1,92 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-  <meta charset="UTF-8">
-  <title>7 мамыр</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: pink;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>7 мамыр</title>
 
-    .box {
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+}
 
-    h1 {
-      font-size: 32px;
-      color: black;
-    }
+.box {
+  text-align: center;
+}
 
-    p {
-      font-size: 18px;
-      font-weight: bold;
-    }
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-    button {
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      color: white;
-      cursor: pointer;
-      margin: 10px;
-      position: absolute;
-    }
 #yes {
-  position: relative;
-  z-index: 2;
+  background: green;
+  color: white;
+  margin-right: 10px;
 }
 
 #no {
+  background: red;
+  color: white;
   position: absolute;
-  z-index: 1;
 }
-    #yes {
-      background-color: green;
-    }
-
-    #no {
-      background-color: red;
-      position: absolute;
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h1>7 мамырға подарок керек па?</h1>
-    <p>Ия ия, жоқ жоқ тез айтшы?</p>
+<div class="box">
+  <h1>7 мамырға подарок керек па?</h1>
+  <p>Ия ия, жоқ жоқ тез айтшы?</p>
 
-    <button id="yes" onclick="yesClick()">Ия</button>
-    <button id="no" onmouseover="moveNo()">Жоқ</button>
-  </div>
+  <button id="yes" onclick="yesClick()">Ия</button>
+  <button id="no" onmouseover="moveNo()">Жоқ</button>
+</div>
 
-  <script>
-    function moveNo() {
-      let noBtn = document.getElementById("no");
+<script>
+let count = 0;
 
-      let x = Math.random() * (window.innerWidth - 100);
-      let y = Math.random() * (window.innerHeight - 60);
+function moveNo() {
+  const noBtn = document.getElementById("no");
 
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
-    }
-  </script>
+  count++;
+
+  if (count >= 5) {
+    // үстіне келеді
+    noBtn.style.top = "50%";
+    noBtn.style.left = "50%";
+    noBtn.style.transform = "translate(-50%, -50%)";
+    noBtn.onclick = showPhoto;
+    return;
+  }
+
+  // қашу
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+function yesClick() {
+  document.body.innerHTML = "<h1>Білдім 😎 подарок күтемін!</h1>";
+}
+
+function showPhoto() {
+  document.body.innerHTML = `
+    <h1>Міне фото 😎</h1>
+    <img src="photo.jpg" style="max-width:300px; border-radius:20px;">
+  `;
+}
+</script>
 
 </body>
 </html>
